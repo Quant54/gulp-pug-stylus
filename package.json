@@ -11,12 +11,17 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
+    "gulp-connect": "^5.5.0",
     "gulp-imagemin": "^4.1.0",
     "gulp-jshint": "^2.1.0",
     "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-stylus": "^2.7.0",
     "gulp-uglify": "^3.0.0",
-    "jshint": "^2.9.5"
+    "gulp-watch": "^5.0.0",
+    "jshint": "^2.9.5",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {}
 }
