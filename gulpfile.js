@@ -14,6 +14,7 @@ var gulp = require('gulp'), //основной плагин gulp
 		growl = require('gulp-notify-growl'),
 		concatCss = require('gulp-concat-css'),
 		concat = require('gulp-concat'),
+		pug = require('gulp-pug'),
     connect = require('gulp-connect'); //livereload
 
 
@@ -72,9 +73,10 @@ gulp.task('connect', function(){
 // таск для билдинга html
 gulp.task('pug:build', function buildHTML() {
   return gulp.src(path.src.html)
-  .pipe(pug({
+  .pipe(pug({ yourTemplate: 'Locals' 
     // Your options in here. 
   }))
+  .pipe(gulp.dest(path.build.html))
    .pipe(connect.reload()) //И перезагрузим наш сервер для обновлений
 });
 
@@ -139,10 +141,6 @@ gulp.task('cssOwn:build', function () {
         .pipe(sourcemaps.write()) //пропишем sourcemap
     
         .pipe(gulp.dest(path.build.css)) //вызгрузим в build
-        	.pipe(growlNotifier({
-    title: 'Done.',
-    message: 'Done something with CSS'
-  }))
         .pipe(connect.reload()) //перезагрузим сервер
 });
 
@@ -175,7 +173,7 @@ gulp.task('htaccess:build', function() {
 
 // билдим все
 gulp.task('build', [
-    'html:build',
+    'pug:build',
     'jshint:build',
     'js:build',
     'css:build',
@@ -191,10 +189,7 @@ gulp.task('watch', function(){
     watch([path.watch.html], function(event, cb) {
         gulp.start('pug:build');
     });
-     //билдим спрайты в случае изменения
-    watch([path.watch.sprites], function(event, cb) {
-        gulp.start('sprites:build');
-    });
+
      //билдим контекстные изрображения в случае изменения
     watch([path.watch.contentImg], function(event, cb) {
         gulp.start('imagescontent:build');
